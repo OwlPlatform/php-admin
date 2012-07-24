@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<h2> New sensors </h2>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var i=0;
+
+function foo()
+{
+$.getJSON("./temp.json",function(data){
+    
+    while (data.sensorId[i].Id != ""){  
+            var content = '<a href="addSensorInfo.php?id='+data.sensorId[i].Id+'" onclick="basicPopup(this.href);return false">' + data.sensorId[i].Id + '</a><br><br>';
+            $(content).appendTo("#sensorId");
+	    i++;
+        }
+    });  
+    setInterval(foo,1000);
+}
+
+$(document).ready(foo);
+
+
+function basicPopup(url) {
+     popupWindow = window.open(url,'popUpWindow','height=500,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+	}
+
+
+</script>
+</head>
+<body>
+    <div>
+        <div id="sensorId"></div>
+         
+    </div>
+</body>
+</html>

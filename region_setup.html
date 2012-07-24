@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GRAIL Region Setup</title>
+    <script type='text/javascript'>
+      <!--
+      function verify_form() { 
+        //TODO Verify that all form fields are filled out
+        //var status = document.getElementById('cbChoices').checked; 
+        //if (document.getElementById('ScrollCB').style.display == 'block') {
+        //  document.getElementById('ScrollCB').style.display = 'none';
+        //} 
+        //else {
+        //  document.getElementById('ScrollCB').style.display = 'block';
+        //}
+      } 
+      //-->
+    </script> 
+  </head>
+  <body>
+    <form action='region_setup.php' method='post' enctype='multipart/form-data'>
+      <label for='region_name'>Region Name:</label><input type='text' name='region_name' />
+      <p><label for='region_width'>Region Width:</label><input type='text' name='region_width' />
+      <p>Region Height: <input type='text' name='region_height' />
+      <p>Units: <input type='text' name='region_units' />
+      <p>Region Map: <input type='file' name='region_map' />
+      <p>Your ID: <input type='text' name='user_id' />
+      <p><input type='submit' />
+    </form>
+  </body>
+</html>
+

@@ -1,0 +1,22 @@
+
+
+.todo-list dt.incomplete i {
+   visibility: hidden;
+}
+
+.todo-list dt span.date {
+  visibility: hidden;
+}
+
+.todo-list dt.complete span.date {
+  visibility: visible;
+  color: #116;
+}
+
+div.hero-unit {
+  color: white;
+  background-color: #666762;
+  background-image: url('../img/owl-crop-fade.jpeg');
+  background-repeat: no-repeat;  
+}
+

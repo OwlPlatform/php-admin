@@ -135,21 +135,21 @@
     <?php include(ABSPATH.'inc/footerScripts.php'); ?>
     <script type="text/javascript">
     
-    <?php
-      foreach ($fakeModules as &$module) {
-        echo "$('#".$module->getId()."').toggle({\n";
-        ?>
-      onClick: function (event, status) {}, // Do something on status change if you want
-      text: {
-        enabled: false, // Change the enabled disabled text on the fly ie: 'ENABLED'
-        disabled: false // and for 'DISABLED'
-      },
-      style: {
-        enabled: 'primary', // default button styles like btn-primary, btn-info, btn-warning just remove the btn- part.
-        disabled: 'danger' // same goes for this, primary, info, warning, danger, success. 
-      }
-    });  
-        <?php
+      <?php
+        foreach ($fakeModules as &$module) {
+          echo "$('#".$module->getId()."').toggle({\n";
+          ?>
+          onClick: function (event, status) {}, // Do something on status change if you want
+          text: {
+            enabled: false, // Change the enabled disabled text on the fly ie: 'ENABLED'
+            disabled: false // and for 'DISABLED'
+          },
+          style: {
+            enabled: 'primary', // default button styles like btn-primary, btn-info, btn-warning just remove the btn- part.
+            disabled: 'danger' // same goes for this, primary, info, warning, danger, success. 
+          }
+        });  
+      <?php
       } // foreach ($module)
     ?>
     </script>

@@ -37,9 +37,9 @@ Steps for using the GRAIL system:
 <?php
 $form = 0;
 
-$confdir = /usr/share/grail;
-$bindir = /usr/bin/grail;
-$webdir = /var/www/htdocs;
+$confdir = '/usr/share/grail';
+$bindir = '/usr/bin/grail';
+$webdir = '/var/www/htdocs';
 
 $db = new SQLite3($confdir.'/grail_db');
 

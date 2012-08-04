@@ -13,14 +13,13 @@ $currentPage = $parts[count($parts) - 1];
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="http://www.owlplatform.com">Owl Platform</a>
+          <a class="brand" href="<?php echo URLADDR; ?>"><?php echo $siteName; ?></a>
           <div class="nav-collapse">
             <ul class="nav">
               <li <?php if($currentPage === "index.php"){echo "class=\"active\" ";}?>><a href="/index.php">Home</a></li>
-              <li <?php if($currentPage === "developers.php"){echo "class=\"active\" ";}?>><a href="/developers.php">Developers</a></li>
-              <li><a href="blog/">Blog</a></li>
-              <li <?php if($currentPage === "about.php"){echo "class=\"active\" ";}?>><a href="#about">About</a></li>
-              <li <?php if($currentPage === "contact.php"){echo "class=\"active\" ";}?>><a href="#contact">Contact</a></li>
+              <li <?php if($currentPage === "browse.php"){echo "class=\"active\" ";}?>><a href="/browse.php">Browse</a></li>
+              <li <?php if($currentPage === "account.php"){echo "class=\"active\" ";}?>><a href="/account.php">Account</a></li>
+              <li <?php if($currentPage === "admin.php"){echo "class=\"active\" ";}?>><a href="/account.php">Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

@@ -1,7 +1,6 @@
   <?php
-    require_once('inc/constants.php');
-    require_once($ABSPATH.'inc/site-settings.php');
-    require_once($ABSPATH.'inc/debug.php');
+    require_once(ABSPATH.'inc/site-settings.php');
+    require_once(ABSPATH.'inc/debug.php');
   ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,7 @@
     <meta name="author" content="">
     <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap-responsive.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap-toggle.css" >
     <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>owl.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>prettify.css" />
     <link rel="stylesheet" id="grail-css"  href="<?php echo URLADDR.'style/'; ?>grail.css" type="text/css" media="all" />

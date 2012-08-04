@@ -1,14 +1,15 @@
-<div id="login-modal">
+<div class="login-form">
 	<form id="login-form" action="verify-login.php" method="post" >
 		<fieldset>
 			<legend>Log in</legend>
-			
-			<label for="login">Username</label>
-			<input type="text" id="login" name="login" />
+			<div class="clearfix">
+			<input type="text" id="login" name="login" placeholder="Username" />
+			</div>
 			<div class="clear"></div>
 			
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" />
+			<div class="clearfix">
+			<input type="password" id="password" name="password" placeholder="Password" />
+			</div>
 			<div class="clear"></div>
 			
 			<label for="remember_me" style="padding: 0;">Remember me?</label>
@@ -16,8 +17,8 @@
 			<div class="clear"></div>
 			
 			<br />
+			<button class="btn primary" type="submit">Sign In</button>
 			
-			<input type="submit" style="margin: -20px 0 0 287px;" class="button" name="commit"value="Log in" />
 		</fieldset>
 	</form>
 </div>

@@ -3,44 +3,80 @@
   require_once('constants.php');
   // Installation-specific values
   require_once(ABSPATH.'inc/site-settings.php');
-  // Include Event class
-  require_once(ABSPATH.'inc/event.php');
-  // Include Module class
-  require_once(ABSPATH.'inc/module.php');
   
-
-  $fakeEvents = array (
-    new Event(mktime(13,20,23,8,3,2012), "Meeting about Maker Faire", "Small Conference Room"),
-    new Event(mktime(12,07,33,8,3,2012), "Rob ate his lunch", "Small Conference Room"),
-    new Event(mktime(11,47,0,8,3,2012), "Tam finished his talk", "Big Conference Room"),
-    new Event(mktime(11,31,45,8,3,2012), "Created Event Class", "Rob on his laptop"),
-    new Event(mktime(11,05,37,8,3,2012), "Tam started his talk", "Big Conference Room"),
+  // World State class
+  require_once(ABSPATH.'inc/worldstate.php');
+  
+  // Attribute class
+  require_once(ABSPATH.'inc/attribute.php');
+  
+  $idArray = array();
+  
+  $smithStates = array(
+    new WorldState("kitchen.refrigerator",
+      array(new Attribute('temperature', '4.0', 'fridge-monitor',mktime(11,55,37,8,7,2012),mktime(0,0,0,1,1,1970)),
+            new Attribute('temperature', '4.5', 'fridge-monitor',mktime(11,50,22,8,7,2012),mktime(11,55,37,8,7,2012)),
+      )
+    ),
+    new WorldState("living room.television",
+      array(new Attribute('on', 'true', 'power-monitor',mktime(20,03,14,8,6,2012),mktime(21,59,07,8,6,2012)),
+            new Attribute('on', 'false', 'power-monitor',mktime(15,32,22,8,6,2012),mktime(16,01,7,8,6,2012)),
+      )
+    ),
   );
   
-  $fakeModules = array (
-    new Module('0123242', 'Security System', True, 'Disarmed'),
-    new Module('AF23XDf', 'Presence Detector', True, '2 Users Present'),
-    new Module('532XCXA', 'Rain Detector', False, 'Last rained July 31, 2012'),
-    new Module('1949822', '142 Happy St.', True, 'Online. Last updated 30 seconds ago'),
+  $winlabStates = array (
+    new WorldState("winlab.door.front door",
+      array(
+        new Attribute('open', 'false', 'binary-switch-solver', mktime(),mktime(0,0,0,1,1,1970)),
+        new Attribute('open', 'true', 'binary-switch-solver', mktime(12,05,22,8,7,2012),mktime(12,05,52,8,7,2012)),
+      )
+    ),
   );
-
-  function printEvent($event) {
-    echo '<div class="event" title="'.$event->getExtraInfo()."\">\n";
-    echo '<span class="eventTime">'.date("H:i",$event->getTimestamp()).'</span>';
-    echo ' &mdash; '.$event->getMessage();
-    echo "</div><br />\n";
-  }
   
-  function printModule($module) {
-    echo '<div class="module" title="'.$module->getStatus()."\">\n";
-    echo '<span class="moduleName">'.$module->getDisplayName().'</span>'."\n";
-    echo '<div id="'.$module->getId().'" class="toggle basic primary" data-enabled="ON" data-disabled="OFF" data-toggle="toggle" title="'.$module->getStatus().'">'."\n";
-    echo '<input type="checkbox" value="1" name="myCheckbox" class="checkbox" checked="checked" />'."\n";
-    echo '<label class="check" for="myCheckbox"></label>'."\n";
-    echo "</div>\n";
-    echo "</div>\n";
-    echo "<br />\n";
-  }
+  function printState(WorldState $state, $editable) {
+    $unsafeChars = array(".","/","\\","$", "\n", "\r", " ", "\t");
+    global $idArray;
+    $id = $state->getId();
+    $attributes = $state->getAttributes();
+    $hasOld = count($attributes) > 1;
+    $isFirst = True;
+    foreach($attributes as &$attr) {
+      $isNew = $attr->getExpiration() === NULLDATE;
+      $tagId = str_replace($unsafeChars,'_',$id.'/'.$attr->getName());
+      // Push tag ID onto the array of all ids for scripting below
+      echo "<tr class=\"";
+      if($isNew || $isFirst) {
+        echo 'state-current"';
+        echo ' id="'.$tagId."\">\n";
+        $idArray[] =  $tagId;
+      } else {
+        echo 'state-old state-hidden old-'.$tagId.'">';
+      }
+      
+      echo "<td>".$id."</td>\n";
+      echo "<td>".$attr->getName()."</td>\n";
+      echo "<td>".$attr->getValue()."</td>\n";
+      echo "<td>".$attr->getOrigin()."</td>\n";
+      echo "<td>".date("M j, Y H:i",$attr->getCreation())."</td>\n";
+      echo "<td>";
+      if($isNew) {
+        echo "&mdash;";
+      }else {      
+        echo date("M j, Y H:i",$attr->getExpiration());
+      }
+      echo "</td>\n";
+      echo '<td>';
+      if($editable){echo '<i class="icon-pencil"></i> ';}
+      if($hasOld && ($isNew || $isFirst)){
+        echo '<span class="icon-list" id="hist-'.$tagId.'"></span>'; 
+      }
+      
+      echo "</td>\n";
+      echo "</tr>\n";
+      $isFirst = False;
+    }
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -58,23 +94,54 @@
       </div>
       <div class="row">
         <div class="span8">
-          <h2>Recent Events</h2>
+          <h2>World Model Browser</h2>
           <hr />
-          <?php
-            foreach($fakeEvents as &$event) {
-              printEvent($event);
-            }
-          ?>
-          
-        </div>
-        <div class="span4">
-          <h2>Module Status</h2>          
-          <hr />
-          <?php
-            foreach($fakeModules as &$module) {
-              printModule($module);
-            }
-          ?>
+          <div class="browser-search-form">
+	          <div class="input-prepend">
+              <span class="add-on">
+                <i class="icon-search"></i>
+              </span>
+              <input type="search" class="span3" placeholder="Search" name="search" id="search"/>
+            </div>
+          </div>
+          <h3>The Smiths</h3>
+          <table class="table table-striped">
+            <thead>
+              <th>Id</th>
+              <th>Attribute</th>
+              <th>Status</th>
+              <th>Origin</th>
+              <th>Created</th>
+              <th>Expires</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+            <?php
+              foreach($smithStates as &$state) {
+                printState($state, True);
+              }
+            ?>
+            </tbody>
+          </table>
+          <h3>WINLAB</h3>
+          <table class="table table-striped">
+            <thead>
+              <th>Id</th>
+              <th>Attribute</th>
+              <th>Status</th>
+              <th>Origin</th>
+              <th>Created</th>
+              <th>Expires</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+            <?php
+              foreach($winlabStates as &$state) {
+                printState($state, False);
+              }
+            ?>
+            </tbody>
+          </table>
         </div>
       </div>
       <hr>
@@ -85,25 +152,14 @@
 
     </div> <!-- /container -->
     <?php include(ABSPATH.'inc/footerScripts.php'); ?>
-    <script type="text/javascript">
-    
-      <?php
-        foreach ($fakeModules as &$module) {
-          echo "$('#".$module->getId()."').toggle({\n";
-          ?>
-          onClick: function (event, status) {}, // Do something on status change if you want
-          text: {
-            enabled: false, // Change the enabled disabled text on the fly ie: 'ENABLED'
-            disabled: false // and for 'DISABLED'
-          },
-          style: {
-            enabled: 'primary', // default button styles like btn-primary, btn-info, btn-warning just remove the btn- part.
-            disabled: 'danger' // same goes for this, primary, info, warning, danger, success. 
-          }
-        });  
-      <?php
-      } // foreach ($module)
+    <?php
+      foreach($idArray as &$tag){
+         echo "<script>\n";
+          echo '$("#hist-'.$tag.'").click(function () {';
+          echo '$(".old-'.$tag.'").toggleClass("state-hidden");';
+          echo '});';
+          echo '</script>';
+      }
     ?>
-    </script>
 	</body>
 </html>

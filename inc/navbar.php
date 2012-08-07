@@ -16,10 +16,10 @@ $currentPage = $parts[count($parts) - 1];
           <a class="brand" href="<?php echo URLADDR; ?>"><?php echo $siteName; ?></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li <?php if($currentPage === "index.php"){echo "class=\"active\" ";}?>><a href="/index.php">Home</a></li>
-              <li <?php if($currentPage === "browse.php"){echo "class=\"active\" ";}?>><a href="/browse.php">Browse</a></li>
-              <li <?php if($currentPage === "account.php"){echo "class=\"active\" ";}?>><a href="/account.php">Account</a></li>
-              <li <?php if($currentPage === "admin.php"){echo "class=\"active\" ";}?>><a href="/account.php">Admin</a></li>
+              <li <?php if($currentPage === "index.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>index.php">Home</a></li>
+              <li <?php if($currentPage === "browse.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>browse.php">Browse</a></li>
+              <li <?php if($currentPage === "account.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>account.php">Account</a></li>
+              <li <?php if($currentPage === "admin.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>account.php">Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

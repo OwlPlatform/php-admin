@@ -1,18 +1,17 @@
   <?php
-    require_once(ABSPATH.'inc/site-settings.php');
     require_once(ABSPATH.'inc/debug.php');
   ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap-responsive.css" >
-    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>bootstrap-toggle.css" >
-    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>owl.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo URLADDR.'style/'; ?>prettify.css" />
-    <link rel="stylesheet" id="grail-css"  href="<?php echo URLADDR.'style/'; ?>grail.css" type="text/css" media="all" />
-    <link rel="stylesheet" id="login-css"  href="<?php echo URLADDR.'style/'; ?>login.css" type='text/css' media="all" />
+    <meta name="author" content="Shubham Jain">
+    <meta name="author" content="Robert Moore">
+    <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>bootstrap-responsive.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>bootstrap-toggle.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>owl.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>prettify.css" />
+    <link rel="stylesheet" id="grail-css"  href="<?php echo $cssPath; ?>grail.css" type="text/css" media="all" />
+    <link rel="stylesheet" id="login-css"  href="<?php echo $cssPath; ?>login.css" type='text/css' media="all" />
 
     <!-- Le styles -->
     <style type="text/css">

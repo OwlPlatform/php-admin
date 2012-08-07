@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>bootstrap-toggle.css" >
     <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>owl.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>prettify.css" />
-    <link rel="stylesheet" id="grail-css"  href="<?php echo $cssPath; ?>grail.css" type="text/css" media="all" />
     <link rel="stylesheet" id="login-css"  href="<?php echo $cssPath; ?>login.css" type='text/css' media="all" />
 
     <!-- Le styles -->

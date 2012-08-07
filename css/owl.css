@@ -111,3 +111,7 @@ div.hero-unit {
   background-repeat: no-repeat;  
 }
 
+.state-hidden {
+  display: none;
+}
+

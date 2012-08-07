@@ -1,58 +1,13 @@
 <?php
-
-  class Event {
-    private $timestamp;
-    private $message;
-    private $extraInfo;
-    
-    public function __construct($timestamp, $message, $extraInfo){
-      $this->timestamp = $timestamp;
-      $this->message = $message;
-      $this->extraInfo = $extraInfo;
-    }
-    
-    public function getTimestamp() {
-      return $this->timestamp;
-    }
-    
-    public function getMessage() {
-      return $this->message;
-    }
-    
-    public function getExtraInfo() {
-      return $this->extraInfo;
-    }
-  }
+  // Application-wide constants
+  require_once('constants.php');
+  // Installation-specific values
+  require_once(ABSPATH.'inc/site-settings.php');
+  // Include Event class
+  require_once(ABSPATH.'inc/event.php');
+  // Include Module class
+  require_once(ABSPATH.'inc/module.php');
   
-  class Module {
-    private $enabled;
-    private $status;
-    private $id;
-    private $displayName;
-    
-    public function __construct($id, $displayName, $enabled, $status) {
-      $this->id = $id;
-      $this->displayName = $displayName;
-      $this->enabled = $enabled;
-      $this->status = $status;
-    }
-    
-    public function getId(){
-      return $this->id;
-    }
-    
-    public function getDisplayName() {
-      return $this->displayName;
-    }
-    
-    public function isEnabled() {
-      return $this->enabled;
-    }
-    
-    public function getStatus() {
-      return $this->status;
-    }
-  }
 
   $fakeEvents = array (
     new Event(mktime(13,20,23,8,3,2012), "Meeting about Maker Faire", "Small Conference Room"),
@@ -92,10 +47,7 @@
 <html>
   <head>
     <title>Owl Platform Online</title>
-    <?php
-      require_once('constants.php');
-      require_once(ABSPATH . 'inc/defaultHeader.php');
-    ?>
+    <?php include(ABSPATH . 'inc/defaultHeader.php'); ?>
   </head>	
   <body>
     <?php include(ABSPATH.'inc/navbar.php'); ?>

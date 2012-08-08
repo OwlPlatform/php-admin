@@ -67,9 +67,9 @@
       }
       echo "</td>\n";
       echo '<td>';
-      if($editable){echo '<i class="icon-pencil"></i> ';}
+      if($editable){echo '<i class="icon-pencil" title="Update value" data-toggle="modal" data-target="#update-modal"></i> ';}
       if($hasOld && ($isNew || $isFirst)){
-        echo '<span class="icon-list" id="hist-'.$tagId.'"></span>'; 
+        echo '<span class="icon-list" id="hist-'.$tagId.'" title="Show/Hide history"></span>'; 
       }
       
       echo "</td>\n";
@@ -142,8 +142,43 @@
             ?>
             </tbody>
           </table>
-        </div>
-      </div>
+        </div> <!-- Span-8 -->
+      </div> <!-- Row -->
+                <div class="modal hide" id="update-modal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h3>Update Value</h3>
+            </div>
+            <div class="modal-body">
+              <form id="update-attr-form" action="update-attribute.php" method="post" >
+		          <fieldset>
+			          <div class="clearfix">
+			          <input type="text" id="update-id" name="identifier" placeholder="identifier" />
+			          </div>
+			          <div class="clear"></div>
+			
+			          <div class="clearfix">
+			          <input type="text" id="update-attr-name" name="attr-name" placeholder="attribute" />
+			          </div>
+			          <div class="clear"></div>
+			          
+       			    <div class="clearfix">
+			          <input type="text" id="update-attr-value" name="attr-value" placeholder="new value" />
+			          </div>
+			          <div class="clear"></div>
+
+                <div class="clearfix">
+			          <input type="text" id="update-attr-time" name="attr-created" placeholder="<?php echo date("Y/m/d H:i:s"); ?>" />
+			          </div>
+			          <div class="clear"></div>
+		          </fieldset>
+	          </form>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Close</a>
+              <a href="#" class="btn btn-primary">Save changes</a>
+            </div>
+          </div>
       <hr>
 
       <footer>
@@ -161,5 +196,6 @@
           echo '</script>';
       }
     ?>
+    
 	</body>
 </html>

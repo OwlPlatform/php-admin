@@ -115,3 +115,8 @@ div.hero-unit {
   display: none;
 }
 
+#update-modal {
+  width: 20em;
+  max-width: 700px;
+}
+

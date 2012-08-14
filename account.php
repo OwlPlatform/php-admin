@@ -4,50 +4,9 @@
   // Installation-specific values
   require_once(ABSPATH.'inc/site-settings.php');
   // Include Event class
-  require_once(ABSPATH.'inc/event.php');
-  // Include Module class
-  require_once(ABSPATH.'inc/module.php');
+  require_once(ABSPATH.'inc/user.php');
   
-
-  $fakeEvents = array (
-    new Event(mktime(13,20,23,8,3,2012), "Meeting about Maker Faire", "Small Conference Room"),
-    new Event(mktime(12,07,33,8,3,2012), "Rob ate his lunch", "Small Conference Room"),
-    new Event(mktime(11,47,0,8,3,2012), "Tam finished his talk", "Big Conference Room"),
-    new Event(mktime(11,31,45,8,3,2012), "Created Event Class", "Rob on his laptop"),
-    new Event(mktime(11,05,37,8,3,2012), "Tam started his talk", "Big Conference Room"),
-    new Event(mktime(10,25,37,8,3,2012), "Tam is practicing his talk", "Tam's cubicle"),
-    new Event(mktime(9,42,37,8,3,2012), "Coffee was brewed", "Kitchen"),
-    new Event(mktime(8,00,00,8,3,2012), "WINLAB was unlocked", "Front door"),
-  );
-  
-  $fakeModules = array (
-    new Module('0123242', 'Security System', TRUE, 'Disarmed'),
-    new Module('AF23XDf', 'Presence Detector', TRUE, '2 Users Present'),
-    new Module('532XCXA', 'Rain Detector', FALSE, 'Last rained July 31, 2012'),
-    new Module('1949822', '142 Happy St.', TRUE, 'Online. Last updated 30 seconds ago'),
-  );
-
-  function printEvent(Event $event) {
-    echo '<tr title="'.$event->getExtraInfo()."\">\n";
-    echo '<td>'.date("H:i",$event->getTimestamp())."</td>\n";
-    echo '<td>'.$event->getMessage()."</td>\n";
-    echo "</tr>\n";
-  }
-  
-  function printModule(Module $module) {
-    echo "<tr>\n";
-    echo '<td>'.$module->getDisplayName()."</td>\n";
-    echo '<td>'.$module->getStatus()."</td>\n";
-    echo "<td><div class=\"module\">\n";
-    echo '<div id="'.$module->getId().'" class="toggle basic" data-enabled="ON" data-disabled="OFF" data-toggle="toggle">'."\n";
-    echo '<input type="checkbox" value="1" name="myCheckbox" class="checkbox" ';
-      if($module->isEnabled()){ echo 'checked ';}
-    echo "\" />.\n";
-    echo '<label class="check" for="myCheckbox"></label>'."\n";
-    echo "</div>\n"; // Button div
-    echo "</td>\n";
-    echo "</tr>\n";
-  }
+  $currentUser = new User("jsmith81", "Jane Smith");
 ?>
 
 <!DOCTYPE html>
@@ -63,43 +22,48 @@
       <div class="page-header">
         <h1>Owl Platform @ <?php echo $siteName; ?></h1>
       </div>
-      <div class="row">
-        <div class="span6">
-          <h2>Recent Events</h2>
-          <hr />
-          <table class="table table-striped">
+      <div class="row show-grid">
+        <div class="span2">
+          <table class="table table-striped"id="account-settings">
             <thead>
-              <th>When</th>
-              <th>What</th>
+             <th><?php echo $currentUser->getUserName(); ?></th>
             </thead>
             <tbody>
-          <?php
-            foreach($fakeEvents as &$event) {
-              printEvent($event);
-            }
-          ?>
+              <tr>
+                <td class="active">Profile</td>
+              </tr>
+              <tr>
+                <td><a href="#">Password</a></td>
+              </tr>
+              <tr>
+                <td><a href="#">Notifications</a></td>
+              </tr>
+              <tr>
+                <td><a href="#">Devices</a></td>
+              </tr>
+              <tr>
+                <td><a href="#">Subscriptions</a></td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <div class="span5">
-          <h2>Operating Status</h2>
-          <hr />
-          <table class="table table-striped">
-            <thead>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Enabled</th>
-            </thead>
-            <tbody>
-          <?php
-            foreach($fakeModules as &$module) {
-              printModule($module);
-            }
-          ?>
-            </tbody>
-          </table>
+        <div class="span4 offset1">
+          <form id='login' action='#' method='post' accept-charset='UTF-8'>
+            <fieldset >
+              <legend>Account Profile</legend>
+              <input type='hidden' name='submitted' id='submitted' value='1'/>
+              <label for='username' >UserName:</label>
+              <input type='text' name='username' id='username'  maxlength="50" value="<?php echo $currentUser->getUserName(); ?>" disabled="disabled"/>
+              <label for='real-name' >Real Name:</label>
+              <input type='text' name='real-name' id='real-name' maxlength="128" value="<?php echo $currentUser->getName(); ?>"/>
+              <br />
+              <input type='submit' name='Submit' value='Save'/>
+            </fieldset>
+          </form>
+
         </div>
       </div>
+      <div class=
       <hr>
 
       <footer>
@@ -109,24 +73,15 @@
     </div> <!-- /container -->
     <?php include(ABSPATH.'inc/footerScripts.php'); ?>
     <script type="text/javascript">
-    
-      <?php
-        foreach ($fakeModules as &$module) {
-          echo "$('#".$module->getId()."').toggle({\n";
-          ?>
-          onClick: function (event, status) {}, // Do something on status change if you want
-          text: {
-            enabled: false, // Change the enabled disabled text on the fly ie: 'ENABLED'
-            disabled: false // and for 'DISABLED'
-          },
-          style: {
-            enabled: 'primary', // default button styles like btn-primary, btn-info, btn-warning just remove the btn- part.
-            disabled: 'danger' // same goes for this, primary, info, warning, danger, success. 
-          }
-        });  
-      <?php
-      } // foreach ($module)
-    ?>
+     $(document).ready(function(){
+     $('input[type="submit"]').attr('disabled','disabled');
+     $('input[type="text"]').keyup(function(){
+        if($(this).val() != ''){
+           $('input[type="submit"]').removeAttr('disabled');
+        }
+     });
+ });
+    </script>
     </script>
 	</body>
 </html>

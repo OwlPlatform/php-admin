@@ -48,7 +48,7 @@
           </table>
         </div>
         <div class="span4 offset1">
-          <form id='login' action='#' method='post' accept-charset='UTF-8'>
+          <form id='profile-update' action='#' method='post' accept-charset='UTF-8'>
             <fieldset >
               <legend>Account Profile</legend>
               <input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -63,7 +63,6 @@
 
         </div>
       </div>
-      <div class=
       <hr>
 
       <footer>
@@ -74,14 +73,14 @@
     <?php include(ABSPATH.'inc/footerScripts.php'); ?>
     <script type="text/javascript">
      $(document).ready(function(){
-     $('input[type="submit"]').attr('disabled','disabled');
-     $('input[type="text"]').keyup(function(){
-        if($(this).val() != ''){
-           $('input[type="submit"]').removeAttr('disabled');
-        }
+       $('input[type="submit"]').attr('disabled','disabled');
+       $('input[type="text"]').keyup(function(){
+          if($(this).val() != ''){
+             $('input[type="submit"]').removeAttr('disabled');
+          }
+       });
      });
- });
     </script>
-    </script>
+
 	</body>
 </html>

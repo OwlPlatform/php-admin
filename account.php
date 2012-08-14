@@ -6,7 +6,14 @@
   // Include Event class
   require_once(ABSPATH.'inc/user.php');
   
-  $currentUser = new User("jsmith81", "Jane Smith");
+  session_start();
+  if(!isset($_SESSION['currentUser'])) {
+    $_SESSION['nextPage'] = $_SERVER['PHP_SELF'];
+    header('location:login.php');
+    exit;
+  }
+  
+  $currentUser = $_SESSION['currentUser'];
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +25,6 @@
   <body>
     <?php include(ABSPATH.'inc/navbar.php'); ?>
   <div class="container">
-      <?php include(ABSPATH.'login.php'); ?>
       <div class="page-header">
         <h1>Owl Platform @ <?php echo $siteName; ?></h1>
       </div>
@@ -26,7 +32,7 @@
         <div class="span2">
           <table class="table table-striped"id="account-settings">
             <thead>
-             <th><?php echo $currentUser->getUserName(); ?></th>
+             <th><?php echo $currentUser->getLogin(); ?></th>
             </thead>
             <tbody>
               <tr>
@@ -53,7 +59,7 @@
               <legend>Account Profile</legend>
               <input type='hidden' name='submitted' id='submitted' value='1'/>
               <label for='username' >UserName:</label>
-              <input type='text' name='username' id='username'  maxlength="50" value="<?php echo $currentUser->getUserName(); ?>" disabled="disabled"/>
+              <input type='text' name='username' id='username'  maxlength="50" value="<?php echo $currentUser->getLogin(); ?>" disabled="disabled"/>
               <label for='real-name' >Real Name:</label>
               <input type='text' name='real-name' id='real-name' maxlength="128" value="<?php echo $currentUser->getName(); ?>"/>
               <br />

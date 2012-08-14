@@ -3,6 +3,15 @@
   require_once('constants.php');
   // Installation-specific values
   require_once(ABSPATH.'inc/site-settings.php');
+  // Include Event class
+  require_once(ABSPATH.'inc/user.php');
+  
+  session_start();
+  if(!isset($_SESSION['currentUser'])) {
+    $_SESSION['nextPage'] = $_SERVER['PHP_SELF'];
+    header('location:login.php');
+    exit;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +23,6 @@
   <body>
     <?php include(ABSPATH.'inc/navbar.php'); ?>
   <div class="container">
-      <?php include(ABSPATH.'login.php'); ?>
       <div class="page-header">
         <h1>Owl Platform @ <?php echo $siteName; ?></h1>
       </div>

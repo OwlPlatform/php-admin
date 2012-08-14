@@ -1,11 +1,11 @@
 <?php
 class User {
+  private $login;
   private $name;
-  private $userName;
 
-  public function __construct($userName, $name) {
+  public function __construct($login, $name) {
+    $this->login = $login;
     $this->name = $name;
-    $this->userName = $userName;
     
   }
   
@@ -13,8 +13,8 @@ class User {
     return $this->name;
   }
   
-  public function getUserName(){
-    return $this->userName;
+  public function getLogin(){
+    return $this->login;
   }
 }
 ?>

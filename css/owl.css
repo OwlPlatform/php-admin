@@ -124,3 +124,13 @@ div.hero-unit {
   background-color: #AAF;
 }
 
+.brand {
+  float: right;
+  display: block;
+}
+
+div.error {
+  color: red;
+  font-weight: bold;
+}
+

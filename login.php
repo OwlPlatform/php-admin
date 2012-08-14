@@ -1,4 +1,12 @@
+<?php 
+  session_start(); 
+?>
 <div class="login-form">
+<?php
+  if(isset($_SESSION['error'])){
+    echo '<div class="error">'.$_SESSION['error']."</div>\n";
+  }
+?>
 	<form id="login-form" action="verify-login.php" method="post" >
 		<fieldset>
 			<legend>Log in</legend>

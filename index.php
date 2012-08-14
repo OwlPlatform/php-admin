@@ -4,20 +4,32 @@
   // Installation-specific values
   require_once(ABSPATH.'inc/site-settings.php');
   // Include Event class
+  require_once(ABSPATH.'inc/user.php');
+  
+  session_start();
+  if(!isset($_SESSION['currentUser'])) {
+    $_SESSION['nextPage'] = $_SERVER['PHP_SELF'];
+    header('location:login.php');
+    exit;
+  }
+  
+  // Include Event class
   require_once(ABSPATH.'inc/event.php');
   // Include Module class
   require_once(ABSPATH.'inc/module.php');
   
 
   $fakeEvents = array (
-    new Event(mktime(13,20,23,8,3,2012), "Meeting about Maker Faire", "Small Conference Room"),
-    new Event(mktime(12,07,33,8,3,2012), "Rob ate his lunch", "Small Conference Room"),
-    new Event(mktime(11,47,0,8,3,2012), "Tam finished his talk", "Big Conference Room"),
-    new Event(mktime(11,31,45,8,3,2012), "Created Event Class", "Rob on his laptop"),
-    new Event(mktime(11,05,37,8,3,2012), "Tam started his talk", "Big Conference Room"),
-    new Event(mktime(10,25,37,8,3,2012), "Tam is practicing his talk", "Tam's cubicle"),
-    new Event(mktime(9,42,37,8,3,2012), "Coffee was brewed", "Kitchen"),
-    new Event(mktime(8,00,00,8,3,2012), "WINLAB was unlocked", "Front door"),
+    new Event(mktime(17,40,00,8,1,2012), "Module \"Sprinklers\" stopped.", ""),
+    new Event(mktime(17,28,00,8,1,2012), "Alarm disarmed by John Smith", "Front Panel"),
+    new Event(mktime(17,27,00,8,1,2012), "John Smith arrived home", "Keys + Phone + Wallet"),
+    new Event(mktime(13,56,00,8,1,2012), "Stopped raining", "Roof + Yard"),
+    new Event(mktime(13,23,00,8,1,2012), "Started raining", "Roof + Yard + Neighbors"),
+    new Event(mktime(11,44,00,8,1,2012), "Mail arrived", "4.3 oz."),
+    new Event(mktime(8,03,00,8,1,2012), "Alarm armed automatically", "No authorized users detected"),
+    new Event(mktime(8,01,00,8,1,2012), "Jane Smith left the house", "Keys + Phone"),
+    new Event(mktime(7,47,00,8,1,2012), "John Smith left the house", "Key + Phone + Wallet"),
+    new Event(mktime(6,00,00,8,1,2012), "Sprinklers cancelled", "60% chance of rain + Barometer"),
   );
   
   $fakeModules = array (
@@ -59,7 +71,7 @@
   <body>
     <?php include(ABSPATH.'inc/navbar.php'); ?>
   <div class="container">
-      <?php include(ABSPATH.'login.php'); ?>
+     
       <div class="page-header">
         <h1>Owl Platform @ <?php echo $siteName; ?></h1>
       </div>

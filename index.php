@@ -29,19 +29,19 @@
     new Event(mktime(8,03,00,8,1,2012), "Alarm armed automatically", "No authorized users detected"),
     new Event(mktime(8,01,00,8,1,2012), "Jane Smith left the house", "Keys + Phone"),
     new Event(mktime(7,47,00,8,1,2012), "John Smith left the house", "Key + Phone + Wallet"),
-    new Event(mktime(6,00,00,8,1,2012), "Sprinklers cancelled", "60% chance of rain + Barometer"),
+    new Event(mktime(6,00,00,8,1,2012), "Lawn watering cancelled", "60% chance of rain + Barometer"),
   );
   
   $fakeModules = array (
     new Module('0123242', 'Security System', TRUE, 'Disarmed'),
     new Module('AF23XDf', 'Presence Detector', TRUE, '2 Users Present'),
-    new Module('532XCXA', 'Rain Detector', FALSE, 'Last rained July 31, 2012'),
+    new Module('532XCXA', 'Sprinkler Controller', FALSE, 'Last watered July 31, 2012'),
     new Module('1949822', '142 Happy St.', TRUE, 'Online. Last updated 30 seconds ago'),
   );
 
   function printEvent(Event $event) {
     echo '<tr title="'.$event->getExtraInfo()."\">\n";
-    echo '<td>'.date("H:i",$event->getTimestamp())."</td>\n";
+    echo '<td>'.date("Y/m/d h:ia",$event->getTimestamp())."</td>\n";
     echo '<td>'.$event->getMessage()."</td>\n";
     echo "</tr>\n";
   }

@@ -33,14 +33,16 @@
           <?php include(ABSPATH.'inc/account-menu.php'); ?>
         </div>
         <div class="span4 offset1">
-          <form id='profile-update' action='#' method='post' accept-charset='UTF-8'>
+          <form id='password-change' action='#' method='post' accept-charset='UTF-8'>
             <fieldset >
-              <legend>Account Profile</legend>
+              <legend>Change Password</legend>
               <input type='hidden' name='submitted' id='submitted' value='1'/>
-              <label for='username' >UserName:</label>
-              <input type='text' name='username' id='username'  maxlength="50" value="<?php echo $currentUser->getLogin(); ?>" disabled="disabled"/>
-              <label for='real-name' >Real Name:</label>
-              <input type='text' name='real-name' id='real-name' maxlength="128" value="<?php echo $currentUser->getName(); ?>"/>
+              <label for='current-password' >Current Password:</label>
+              <input type='password' name='current-password' id='current-password'  maxlength="128"/>
+              <label for='new-password1' >New Password:</label>
+              <input type='password' name='new-password1' id='new-password1' maxlength="128" />
+              <label for='new-password2' >Confirm Password:</label>
+              <input type='password' name='new-password2' id='new-password2' maxlength="128" />
               <br />
               <input type='submit' name='Submit' value='Save'/>
             </fieldset>
@@ -56,16 +58,6 @@
 
     </div> <!-- /container -->
     <?php include(ABSPATH.'inc/footerScripts.php'); ?>
-    <script type="text/javascript">
-     $(document).ready(function(){
-       $('input[type="submit"]').attr('disabled','disabled');
-       $('input[type="text"]').keyup(function(){
-          if($(this).val() != ''){
-             $('input[type="submit"]').removeAttr('disabled');
-          }
-       });
-     });
-    </script>
 
 	</body>
 </html>

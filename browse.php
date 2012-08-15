@@ -23,8 +23,10 @@
   
   $smithStates = array(
     new WorldState("kitchen.refrigerator",
-      array(new Attribute('temperature', '4.0', 'fridge-monitor',mktime(11,55,37,8,7,2012),mktime(0,0,0,1,1,1970)),
-            new Attribute('temperature', '4.5', 'fridge-monitor',mktime(11,50,22,8,7,2012),mktime(11,55,37,8,7,2012)),
+      array(new Attribute('temperature', '4.0 C', 'fridge-monitor',mktime(11,55,37,8,7,2012),mktime(0,0,0,1,1,1970)),
+            new Attribute('temperature', '5.5 C', 'fridge-monitor',mktime(11,50,22,8,7,2012),mktime(11,55,37,8,7,2012)),
+            new Attribute('temperature', '7.0 C', 'fridge-monitor',mktime(11,45,22,8,7,2012),mktime(11,50,22,8,7,2012)),
+            new Attribute('temperature', '3.5 C', 'fridge-monitor',mktime(11,40,22,8,7,2012),mktime(11,45,22,8,7,2012)),
       )
     ),
     new WorldState("living room.television",
@@ -35,10 +37,10 @@
   );
   
   $winlabStates = array (
-    new WorldState("winlab.door.front door",
+    new WorldState("sprinkler.front",
       array(
-        new Attribute('open', 'false', 'binary-switch-solver', mktime(),mktime(0,0,0,1,1,1970)),
-        new Attribute('open', 'true', 'binary-switch-solver', mktime(12,05,22,8,7,2012),mktime(12,05,52,8,7,2012)),
+        new Attribute('watering', 'false', 'binary-switch-solver', strtotime('-5 minutes', mktime()),mktime(0,0,0,1,1,1970)),
+        new Attribute('watering', 'true', 'binary-switch-solver', strtotime('-1 hours', mktime()),strtotime('-5 minutes',mktime())),
       )
     ),
   );
@@ -131,7 +133,7 @@
             ?>
             </tbody>
           </table>
-          <h3>WINLAB</h3>
+          <h3>142 Happy St.</h3>
           <table class="table table-striped">
             <thead>
               <th>Id</th>

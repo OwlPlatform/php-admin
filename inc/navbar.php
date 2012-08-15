@@ -18,7 +18,7 @@ $currentPage = $parts[count($parts) - 1];
             <ul class="nav">
               <li <?php if($currentPage === "index.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>index.php"><i class="icon-home <?php if($currentPage === "index.php"){echo 'icon-white';}?>"></i> Home</a></li>
               <li <?php if($currentPage === "browse.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>browse.php"><i class="icon-globe <?php if($currentPage === "browse.php"){echo 'icon-white';}?>"></i> Browse</a></li>
-              <li <?php if($currentPage === "account.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>account.php"><i class="icon-user <?php if($currentPage === "account.php"){echo 'icon-white';}?>"></i> Account</a></li>
+              <li <?php if(strpos($currentPage,"account")!==FALSE){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>account-profile.php"><i class="icon-user <?php if(strpos($currentPage,"account")!==FALSE){echo 'icon-white';}?>"></i> Account</a></li>
               <li <?php if($currentPage === "admin.php"){echo "class=\"active\" ";}?>><a href="<?php echo URLADDR;?>admin.php"><i class="icon-wrench <?php if($currentPage === "admin.php"){echo 'icon-white';}?>"></i> Admin</a></li>
               <li><a href="<?php echo URLADDR;?>logout.php">Logout</a></li>
             </ul>

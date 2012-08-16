@@ -124,6 +124,10 @@ div.hero-unit {
   background-color: #AAF;
 }
 
+#admin-settings .active {
+  background-color: #AAF;
+}
+
 .brand {
   float: right;
   display: block;
